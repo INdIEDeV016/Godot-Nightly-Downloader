@@ -125,7 +125,6 @@ margin_left = -98.0
 margin_top = -37.0
 margin_right = 98.0
 margin_bottom = -11.0
-mouse_default_cursor_shape = 2
 text = "OK, I understood."
 scene = ExtResource( 7 )
 
