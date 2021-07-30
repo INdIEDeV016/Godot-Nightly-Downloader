@@ -8,9 +8,15 @@ var file_ext = ''
 var date = ''
 var up_to_date = false
 
-onready var OSSelector = $VBoxContainer/HBoxContainer/OSSelector
-onready var SystemSelector = $VBoxContainer/HBoxContainer2/SystemSelector
-onready var DownloadButton = $HBoxContainer2/DownloadButton
+onready var OSSelector = $VBoxContainer2/VBoxContainer/HBoxContainer/OSSelector
+onready var SystemSelector = $VBoxContainer2/VBoxContainer/HBoxContainer2/SystemSelector
+onready var DownloadButton = $VBoxContainer2/HBoxContainer2/DownloadButton
+onready var CancelButton = $VBoxContainer2/HBoxContainer2/VBoxContainer/CancelButton
+onready var RetryButton = $VBoxContainer2/HBoxContainer2/VBoxContainer/RetryButton
+onready var downloaded = $HBoxContainer3/Downloaded
+onready var indicator = $HBoxContainer3/Indicator
+onready var total = $HBoxContainer3/Total
+onready var progress_bar = $ProgressBar
 
 func _ready():
 	match current_os:
@@ -33,7 +39,8 @@ func _ready():
 	_update_file_name()
 	
 	$CanvasLayer2/TitleBar.connect("close_dialog", $CanvasLayer/CloseDialog, "popup")
-
+	CancelButton.disabled = true
+	
 	$ProgressBar.value = 0
 	up_to_date = is_up_to_date()
 	update_download_link()
@@ -98,7 +105,7 @@ func _on_SystemSelector_item_selected(_ID):
 
 
 func update_download_button(text):
-	$HBoxContainer2/DownloadButton.text = text
+	DownloadButton.text = text
 
 func _on_DownloadButton_pressed():
 	_update_file_name()
@@ -113,6 +120,7 @@ func _on_DownloadButton_pressed():
 	else:
 		# No file found here so we can go ahead and download
 		# the latest version
+		CancelButton.disabled = false
 		print("[+] Starting download")
 		DownloadButton.disabled = true
 		DownloadButton.text = "Downloading..."
@@ -137,10 +145,10 @@ func _process(_delta):
 		current = $HTTPRequest.get_downloaded_bytes()
 		update_progress_bar(current*100/size)
 		downloaded.text = calculate_bytes(current)
-		$HBoxContainer3/Total.text = calculate_bytes(size)
+		total.text = calculate_bytes(size)
 		
 	if not up_to_date:
-		$HBoxContainer2/VBoxContainer/RetryButton.disabled = true
+		RetryButton.disabled = true
 		
 	if result == 2:
 		$CanvasLayer2/Label2.text = "Can't connect to server"
@@ -193,6 +201,7 @@ func _update_file_name():
 
 func _on_CancelButton_pressed():
 	if not up_to_date:
+		reset()
 		print("[-] Canceled the current download...")
 		DownloadButton.text = "Download again"
 		$HTTPRequest.cancel_request()
@@ -202,15 +211,17 @@ func _on_CancelButton_pressed():
 
 func _on_RetryButton_pressed():
 	print("[+] Retrying download...")
-	if not up_to_date:
-		$HTTPRequest.cancel_request()
-		$HTTPRequest.request(download_link)
-	else:
-		$HBoxContainer2/VBoxContainer/RetryButton.disabled = true
+	$HTTPRequest.cancel_request()
+	$HTTPRequest.request(download_link)
+	RetryButton.disabled = true
 
-
-onready var downloaded = $HBoxContainer3/Downloaded
-onready var total = $HBoxContainer3/Total
 
 func calculate_bytes(amount: float) -> String:
 	return String().humanize_size(amount).replacen("i", "")
+
+
+func reset() -> void:
+	progress_bar.value = 0
+	total.text = "0 B"
+	downloaded.text = "0 B"
+	indicator.text = "0%"

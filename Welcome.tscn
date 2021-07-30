@@ -96,20 +96,20 @@ size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "This is a Downloader for downloading the latest (under development) version of Godot which is actually the Godot 4.0
 
-The downloader uses this website to download Godot
+The downloader uses this website to download Godot...
 [color=aqua] [url=https://hugo.pro/projects/godot-builds/] https://hugo.pro/projects/godot-builds/ [/url] [/color]
 
 This downloader downloads a zip file of the Engine and stores it in your user directory.
 
-[color=yellow] Warning: You should use these builds only for testing purposes. Don't use these builds for your project. [/color]"
+[color=yellow] Warning: You should use these builds only for testing purposes. Don't use these builds for your project or production use.[/color]"
 text = "This is a Downloader for downloading the latest (under development) version of Godot which is actually the Godot 4.0
 
-The downloader uses this website to download Godot
+The downloader uses this website to download Godot...
   https://hugo.pro/projects/godot-builds/  
 
 This downloader downloads a zip file of the Engine and stores it in your user directory.
 
- Warning: You should use these builds only for testing purposes. Don't use these builds for your project. "
+ Warning: You should use these builds only for testing purposes. Don't use these builds for your project or production use."
 selection_enabled = true
 override_selected_font_color = true
 __meta__ = {
@@ -144,6 +144,7 @@ margin_left = 23.0
 margin_top = 367.0
 margin_right = 187.0
 margin_bottom = 387.0
+focus_mode = 1
 text = "About this Downloader"
 __meta__ = {
 "_edit_use_anchors_": false
