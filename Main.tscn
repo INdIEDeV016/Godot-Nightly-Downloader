@@ -1,0 +1,277 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://App.gd" type="Script" id=1]
+[ext_resource path="res://Godot.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/Quicksand-VariableFont_wght.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://TitleBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://CloseDialog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Theme.theme" type="Theme" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.14902, 0.172549, 0.231373, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 27.0
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="."]
+margin_left = 39.0
+margin_top = 42.0
+margin_right = 170.0
+margin_bottom = 166.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -409.0
+margin_top = 38.0
+margin_right = -27.0
+margin_bottom = 194.0
+custom_fonts/font = SubResource( 1 )
+text = "Godot Nightly Builds Downloader
+"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -248.0
+margin_top = 152.0
+margin_right = -158.0
+margin_bottom = 202.0
+custom_fonts/font = SubResource( 2 )
+text = "v_0.1.0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 15.0
+margin_top = 18.0
+margin_right = -15.0
+margin_bottom = 75.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 570.0
+margin_bottom = 26.0
+custom_constants/separation = 60
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 112.0
+margin_bottom = 23.0
+text = "Select your OS: "
+
+[node name="OSSelector" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 172.0
+margin_right = 570.0
+margin_bottom = 26.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Windows"
+items = [ "Windows", null, false, 0, null, "Mac OS X", null, false, 1, null, "Linux (X11)", null, false, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 31.0
+margin_right = 570.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 168.0
+margin_bottom = 23.0
+text = "Select the Architecture: "
+
+[node name="SystemSelector" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 172.0
+margin_right = 570.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 77, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "x64"
+items = [ "x64", null, false, 0, null, "x32", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = -118.0
+margin_right = -15.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DownloadButton" type="Button" parent="HBoxContainer2"]
+margin_right = 396.0
+margin_bottom = 82.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Download"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+margin_left = 400.0
+margin_right = 570.0
+margin_bottom = 82.0
+size_flags_vertical = 3
+
+[node name="RetryButton" type="Button" parent="HBoxContainer2/VBoxContainer"]
+margin_right = 170.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 170, 0 )
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+text = "Retry"
+
+[node name="CancelButton" type="Button" parent="HBoxContainer2/VBoxContainer"]
+margin_top = 43.0
+margin_right = 170.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 170, 0 )
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 120.0
+margin_top = -37.0
+margin_right = -120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Downloaded" type="Label" parent="HBoxContainer3"]
+margin_right = 117.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "0 B"
+valign = 1
+
+[node name="Indicator" type="Label" parent="HBoxContainer3"]
+margin_left = 121.0
+margin_top = 8.0
+margin_right = 238.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "0%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Total" type="Label" parent="HBoxContainer3"]
+margin_left = 242.0
+margin_top = 8.0
+margin_right = 360.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "0 MB"
+align = 2
+valign = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="TitleBar" parent="CanvasLayer2" instance=ExtResource( 4 )]
+
+[node name="Label2" type="Label" parent="CanvasLayer2"]
+self_modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -157.0
+margin_right = 158.0
+margin_bottom = 28.0
+text = "Info"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="CloseDialog" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+download_file = "https://hugo.pro/projects/godot-builds/"
+download_chunk_size = 1048576
+use_threads = true
+
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/OSSelector" to="." method="_on_OSSelector_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/SystemSelector" to="." method="_on_SystemSelector_item_selected"]
+[connection signal="pressed" from="HBoxContainer2/DownloadButton" to="." method="_on_DownloadButton_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/RetryButton" to="." method="_on_RetryButton_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

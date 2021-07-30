@@ -1,0 +1,156 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Godot.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/Quicksand-VariableFont_wght.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Theme.theme" type="Theme" id=3]
+[ext_resource path="res://TitleBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Welcome.gd" type="Script" id=5]
+[ext_resource path="res://NextButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Main.tscn" type="PackedScene" id=7]
+[ext_resource path="res://CloseDialog.tscn" type="PackedScene" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Welcome" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.14902, 0.172549, 0.231373, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="icon" type="TextureRect" parent="."]
+margin_left = 255.0
+margin_top = 109.0
+margin_right = 344.0
+margin_bottom = 198.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -186.0
+margin_top = 22.0
+margin_right = 186.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 1 )
+text = "Godot Nightly Builds"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -69.0
+margin_top = 71.0
+margin_right = 73.0
+margin_bottom = 101.0
+custom_fonts/font = SubResource( 2 )
+text = "Version: 0.2.0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Information" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.0
+margin_top = 6.0
+margin_right = 270.0
+margin_bottom = 154.0
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "This is a Downloader for downloading the latest (under development) version of Godot which is actually the Godot 4.0
+
+The downloader uses this website to download Godot
+[color=aqua] [url=https://hugo.pro/projects/godot-builds/] https://hugo.pro/projects/godot-builds/ [/url] [/color]
+
+This downloader downloads a zip file of the Engine and stores it in your user directory.
+
+[color=yellow] Warning: You should use these builds only for testing purposes. Don't use these builds for your project. [/color]"
+text = "This is a Downloader for downloading the latest (under development) version of Godot which is actually the Godot 4.0
+
+The downloader uses this website to download Godot
+  https://hugo.pro/projects/godot-builds/  
+
+This downloader downloads a zip file of the Engine and stores it in your user directory.
+
+ Warning: You should use these builds only for testing purposes. Don't use these builds for your project. "
+selection_enabled = true
+override_selected_font_color = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" parent="." instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -98.0
+margin_top = -37.0
+margin_right = 98.0
+margin_bottom = -11.0
+mouse_default_cursor_shape = 2
+text = "OK, I understood."
+scene = ExtResource( 7 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="TitleBar" parent="CanvasLayer2" instance=ExtResource( 4 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="CloseDialog" parent="CanvasLayer" instance=ExtResource( 8 )]
+visible = false
+
+[node name="AboutButton" type="LinkButton" parent="."]
+margin_left = 23.0
+margin_top = 367.0
+margin_right = 187.0
+margin_bottom = 387.0
+text = "About this Downloader"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="meta_clicked" from="Information" to="." method="_on_Information_meta_clicked"]
+[connection signal="meta_hover_ended" from="Information" to="." method="_on_Information_meta_hover_ended"]
+[connection signal="meta_hover_started" from="Information" to="." method="_on_Information_meta_hover_started"]
+[connection signal="pressed" from="AboutButton" to="." method="_on_AboutButton_pressed"]
